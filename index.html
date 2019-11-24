@@ -1,41 +1,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Bryan Chong</title>
+		<title>undefined</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="stylesheets/main.css">
 		<link rel="shortcut icon" href="favicon.ico">
 		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script> 	
-		<script>
-			$(document).ready(function(){
-				$.get("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=bryanchong&api_key=b25b959554ed76058ac220b7b2e0a026&limit=1&format=json", function(data, status){
-					$("#music-span").html(data["recenttracks"]["track"][0]["artist"]["#text"] + "<br/>" + data["recenttracks"]["track"][0]["name"]);
-				});
-				
-				setInterval(function(){
-					$.get("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=bryanchong&api_key=b25b959554ed76058ac220b7b2e0a026&limit=1&format=json", function(data, status){
-						$("#music-span").html(data["recenttracks"]["track"][0]["artist"]["#text"] + "<br/>" + data["recenttracks"]["track"][0]["name"]);
-					});
-				}, 20000);
-			});
-		</script>
 	</head>
-	
+
 	<body>
-
 		<div class="main">
-
-			<img src="./images/ah.png" width="50%" height="50%" title="Literally how I feel most days, but caffeine to the rescue. © Franz Xaver Messerschmidt" />
-			<div><span id="music-cap">Last listened to:</span></div>
-			<div><span id="music-span"></span></div>
-
-		</div>
-
-		<div class="footer">
-			<a href="https://pages.github.com/">&#127757;</a> <a href="https://www.last.fm">&#127925;</a>
+			<div class="main-item-wrapper">
+				<div class="main-item">
+					<span>have a good day.</span>
+				</div>
+				<!-- <div class="main-item">
+					<span><a href="#" target="_blank">&#128374;&#65039;</a></span>
+					<span><a href="#" target="_blank">&#128268;</a></span>
+					<span><a href="#" target="_blank">&#127769;</a></span>
+					<span><a href="#" target="_blank">&#127872;</a></span>
+					<span><a href="#" target="_blank">&#10068;</a></span>
+					<span><a href="#" target="_blank">&#128141;</a></span>
+				</div> -->
+			</div>
 		</div>
 	</body>
 </html>
