@@ -21,12 +21,12 @@ ol, ul{
 
 .main {
 	display: flex;
-  align-items: center;
-  justify-content: center;
+	align-items: center;
+	justify-content: center;
 	height: 100%;
-	font-size: 16px;
+	font-size: 2em;
 	text-align: center;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Nanum Pen Script', sans-serif;
 	color: #FFFFFF;
 }
 
