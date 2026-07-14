@@ -1,19 +1,33 @@
+:root {
+	--bg: #0a0b0d;
+	--panel: #131418;
+	--panel-border: rgba(232, 162, 76, 0.16);
+	--text: #ece9e2;
+	--text-dim: #797d87;
+	--accent: #e8a24c;
+	--accent-soft: rgba(232, 162, 76, 0.35);
+	--track: #1b1d22;
+	--radius: 10px;
+	--ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 html {
 	height: 100%;
 }
 
-body{
+body {
 	height: 100%;
 	margin: 0;
-	background-color: #212121;
+	background:
+		radial-gradient(circle at 50% 28%, #101115 0%, #08090b 70%);
 }
 
 a {
 	text-decoration: none;
-	color: #EBEBEB;
+	color: var(--text);
 }
 
-ol, ul{
+ol, ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -24,22 +38,208 @@ ol, ul{
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	text-align: center;
-	font-family: 'Nanum Pen Script', sans-serif;
-	color: #FFFFFF;
+	padding: 24px;
+	box-sizing: border-box;
+	font-family: 'Fira Code', monospace;
+	color: var(--text);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
-.main-item {
-	display: block;
-	font-size: 2.5em;
+/* ---------- terminal panel ---------- */
+
+.terminal {
+	position: relative;
+	width: 100%;
+	max-width: 380px;
+	padding: 22px 26px 26px;
+	border-radius: var(--radius);
+	background: var(--panel);
+	border: 1px solid var(--panel-border);
+	box-shadow:
+		0 40px 80px -24px rgba(0, 0, 0, 0.65),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+	overflow: hidden;
+	animation: flicker 0.5s steps(2, end) both;
 }
 
-.main-item-subitem {
-	font-size: 1.5em;
-	padding: 5px 0;
+.terminal::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: repeating-linear-gradient(
+		to bottom,
+		rgba(255, 255, 255, 0.025) 0px,
+		rgba(255, 255, 255, 0.025) 1px,
+		transparent 1px,
+		transparent 3px
+	);
+	mix-blend-mode: overlay;
+}
+
+.terminal__header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 18px;
+	opacity: 0;
+	transform: translateY(6px);
+	animation: rise 0.6s var(--ease) 0.05s forwards;
+}
+
+.status-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--accent);
+	opacity: 1;
+	transition: opacity 0.08s linear;
+}
+
+.terminal__title {
+	font-size: 11px;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--text-dim);
+}
+
+.terminal__body {
+	display: flex;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 11px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+	opacity: 0;
+	transform: translateY(6px);
+	animation: rise 0.6s var(--ease) forwards;
+}
+
+.row:nth-of-type(1) { animation-delay: 0.15s; }
+.row:nth-of-type(2) { animation-delay: 0.25s; }
+.row:nth-of-type(3) { animation-delay: 0.35s; border-bottom: none; padding-top: 15px; }
+
+.row--stack {
+	flex-direction: column;
+	align-items: stretch;
+	gap: 8px;
+}
+
+.label {
+	font-size: 12px;
+	color: var(--text-dim);
+	letter-spacing: 0.03em;
+}
+
+.value {
+	font-size: 13px;
+	color: var(--text);
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+/* ---------- progress bar ---------- */
+
+.bar {
+	position: relative;
+	height: 26px;
+	border-radius: 6px;
+	background: var(--track);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	overflow: hidden;
+}
+
+.bar__fill {
+	position: absolute;
+	inset: 0;
+	width: 0%;
+	background: linear-gradient(90deg, #c9832f, var(--accent));
+	box-shadow: 0 0 16px 0 rgba(232, 162, 76, 0.35);
+	transition: width 1.4s var(--ease);
+}
+
+.bar__pct {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: #fff;
+	mix-blend-mode: difference;
+	font-variant-numeric: tabular-nums;
+}
+
+.sublabel {
+	font-size: 11px;
+	color: var(--text-dim);
+	text-align: right;
+}
+
+/* ---------- mood row ---------- */
+
+.row--mood {
+	font-size: 13px;
+	color: var(--text);
+}
+
+.prompt {
+	color: var(--accent);
+	margin-right: 8px;
+}
+
+/* ---------- motion ---------- */
+
+@keyframes rise {
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes flicker {
+	0% { opacity: 0; }
+	4% { opacity: 1; }
+	8% { opacity: 0.4; }
+	12% { opacity: 1; }
+	100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.terminal,
+	.terminal__header,
+	.row,
+	.status-dot {
+		animation: none !important;
+		opacity: 1 !important;
+		transform: none !important;
+	}
+	.bar__fill {
+		transition: none;
+	}
 }
 
 @media screen and (max-width: 639px) {
+	.terminal {
+		max-width: 100%;
+		padding: 18px 18px 22px;
+	}
 
+	.value {
+		font-size: 12px;
+	}
 
+	.row--mood {
+		font-size: 12.5px;
+	}
 }

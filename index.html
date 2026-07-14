@@ -1,33 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<title>정BRYAN</title>
+		<title>bryanchong</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="stylesheets/main.css">
+		<meta name="description" content="A minimal personal status page.">
+		<meta name="theme-color" content="#0a0b0d">
+		<link rel="stylesheet" href="stylesheets/main.css?v=2">
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Satisfy&display=swap" rel="stylesheet">
-
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
 	</head>
 
 	<body>
 		<div class="main">
-			<div class="main-item-wrapper">
-				<div class="main-item-subitem">
-					<span id="time"></span>
-					<div><span id="progress"></span></div>
+			<main class="terminal">
+				<div class="terminal__header">
+					<span class="status-dot" aria-hidden="true"></span>
+					<span class="terminal__title">status</span>
 				</div>
-				<div class="main-item">
-					<span>have <span id="adjective"></span> day</span>
+
+				<div class="terminal__body">
+					<div class="row">
+						<span class="label">time</span>
+						<span class="value" id="time"></span>
+					</div>
+
+					<div class="row row--stack">
+						<span class="label">year</span>
+						<div class="bar" role="img" aria-label="Year progress">
+							<div class="bar__fill" id="barFill"></div>
+							<span class="bar__pct" id="barPct"></span>
+						</div>
+						<span class="sublabel" id="daysLeft"></span>
+					</div>
+
+					<div class="row row--mood">
+						<span class="prompt" aria-hidden="true">&gt;</span>
+						<span>have <span id="adjective"></span> day</span>
+					</div>
 				</div>
-			</div>
+			</main>
 		</div>
 	</body>
-	<script src="js/daily.js"></script>
+	<script src="js/daily.js?v=2"></script>
 </html>
-
-
